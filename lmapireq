@@ -1,0 +1,245 @@
+#!/bin/bash
+
+usage_error () {
+  cat << EOF
+--------------------------------------------------------------------------------------------------------
+Name: lmapireq
+Full Name: Lab Management API Requester
+--------------------------------------------------------------------------------------------------------
+Description
+--------------------------------------------------------------------------------------------------------
+Used to make Lab Management API Requests simpler
+
+Dependencies:
+* BASH
+* Python
+* /usr/bin/getAuthTokenLM script (https://mgr.cloud.maa.collab.net/developer/rest_api_authentication.html#signing)
+
+Parameters:
+-h | --host     host-url
+-a | --apikey   apikey of the user
+-u | --user     username
+-i | --uri      api access uri
+-m | --method   REST API methods like POST/PUT/DELETE (not needed if request is GET, GET is default)
+-p | --param    JSON parameters required if method is specified (-m or --method option)
+
+Usage:
+
+lmapireq -h https://mgr.cloud.maa.collab.net -a acdba630-84e8-13a1-816d-3f4cb51af8eb -u myuser -i hosts/cu008.cloud.maa.collab.net
+
+(or)
+
+lmapireq --host https://mgr.cloud.maa.collab.net -a acdba630-84e8-13a1-816d-3f4cb51af8eb -u myuser --uri hosts/cu010.cloud.maa.collab.net --method POST --param '{"name":"snapshot-name5", "desc":"Snapshot description"}'
+--------------------------------------------------------------------------------------------------------
+EOF
+}
+
+if [ -z "$1" ] || [ -z "$3" ] || [ -z "$5" ] || [ -z "$7" ]
+then
+  usage_error
+  exit
+else
+  if [ $1 = '-h' ] || [ $1 = '--host' ]
+  then
+    host=$2
+  else
+    if [ $3 = '-h' ] || [ $3 = '--host' ]
+    then
+      host=$4
+    else
+      if [ $5 = '-h' ] || [ $5 = '--host' ]
+      then
+        host=$6
+      else
+        if [ $7 = '-h' ] || [ $7 = '--host' ]
+        then
+          host=$8
+        else
+          if [ $9 = '-h' ] || [ $9 = '--host' ]
+          then
+            host=${10}
+          else
+            if [ ${11} = '-h' ] || [ ${11} = '--host' ]
+            then
+              host=${12}
+            fi
+          fi
+        fi
+      fi
+    fi
+  fi
+  if [ -z "$host" ]
+    then
+    echo "Host not specified\n\n"
+    usage_error
+    exit
+  fi
+
+  if [ $1 = '-a' ] || [ $1 = '--apikey' ]
+  then
+    apikey=$2
+  else
+    if [ $3 = '-a' ] || [ $3 = '--apikey' ]
+    then
+      apikey=$4
+    else
+      if [ $5 = '-a' ] || [ $5 = '--apikey' ]
+      then
+        apikey=$6
+      else
+        if [ $7 = '-a' ] || [ $7 = '--apikey' ]
+        then
+          apikey=$8
+        else
+          if [ $9 = '-a' ] || [ $9 = '--apikey' ]
+          then
+            apikey=${10}
+          else
+            if [ ${11} = '-a' ] || [ ${11} = '--apikey' ]
+            then
+              apikey=${12}
+            fi
+          fi
+        fi
+      fi
+    fi
+  fi
+  if [ -z "$apikey" ]
+  then
+    echo "API Key not specified\n\n"
+    usage_error
+    exit
+  fi
+
+  if [ $1 = '-u' ] || [ $1 = '--user' ]
+  then
+    user=$2
+  else
+    if [ $3 = '-u' ] || [ $3 = '--user' ]
+    then
+      user=$4
+    else
+      if [ $5 = '-u' ] || [ $5 = '--user' ]
+      then
+        user=$6
+      else
+        if [ $7 = '-u' ] || [ $7 = '--user' ]
+        then
+          user=$8
+        else
+          if [ $9 = '-u' ] || [ $9 = '--user' ]
+          then
+            user=${10}
+          else
+            if [ ${11} = '-u' ] || [ ${11} = '--user' ]
+            then
+              user=${12}
+            fi
+          fi
+        fi
+      fi
+    fi
+  fi
+  if [ -z "$user" ]
+  then
+    echo "User not specified\n\n"
+    usage_error
+    exit
+  fi
+
+  if [ $1 = '-i' ] || [ $1 = '--uri' ]
+  then
+    uri=$2
+  else
+    if [ $3 = '-i' ] || [ $3 = '--uri' ]
+    then
+      uri=$4
+    else
+      if [ $5 = '-i' ] || [ $5 = '--uri' ]
+      then
+        uri=$6
+      else
+        if [ $7 = '-i' ] || [ $7 = '--uri' ]
+        then
+          uri=$8
+        else
+          if [ $9 = '-i' ] || [ $9 = '--uri' ]
+          then
+            uri=${10}
+          else
+            if [ ${11} = '-i' ] || [ ${11} = '--uri' ]
+            then
+              uri=${12}
+            fi
+          fi
+        fi
+      fi
+    fi
+  fi
+  if [ -z "$uri" ]
+  then
+    echo "URI not specified\n\n"
+    usage_error
+    exit
+  fi
+
+  if [ $1 = '-m' ] || [ $1 = '--method' ]
+  then
+    if [ $3 = '-p' ] || [ $3 = '--param' ]
+    then
+      other="-X $2 -d '$4'"
+    else
+      echo "JSON Parameter is missing\n\n"
+    fi
+  else
+    if [ $3 = '-m' ] || [ $3 = '--method' ]
+    then
+      if [ $5 = '-p' ] || [ $5 = '--param' ]
+      then
+        other="-X $4 -d '$6'"
+      else
+        echo "JSON Parameter is missing\n\n"
+      fi
+    else
+      if [ $5 = '-m' ] || [ $5 = '--method' ]
+      then
+        if [ $7 = '-p' ] || [ $7 = '--param' ]
+        then
+          other="-X $6 -d '$8'"
+        else
+          echo "JSON Parameter is missing\n\n"
+        fi
+      else
+        if [ $7 = '-m' ] || [ $7 = '--method' ]
+        then
+          if [ $9 = '-p' ] || [ $9 = '--param' ]
+          then
+            other="-X $8 -d '${10}'"
+           else
+             echo "JSON Parameter is missing\n\n"
+           fi
+         else
+           if [ $9 = '-m' ] || [ $9 = '--method' ]
+           then
+             if [ ${11} = '-p' ] || [ ${11} = '--param' ]
+             then
+               other="-X ${10} -d '${12}'"
+             else
+               echo "JSON Parameter is missing\n\n"
+             fi
+           fi
+         fi
+      fi
+    fi
+  fi
+
+  echo "other: $other"
+  usrtok=`curl -k $host/api/auth/token/grue|grep token|sed 's/.*: "\(.*\)"/\1/'`
+  authtok=`/usr/bin/getAuthTokenLM $usrtok $apikey`
+  IFSO=$IFS
+  IFS=' '
+  echo "curl -k -v -s -H \"X-Auth-Token: $authtok\" -H \"X-Auth-User: $user\" $other $host/api/$uri">/tmp/.lmapicmd
+  IFS=$IFSO
+  sh /tmp/.lmapicmd
+  rm /tmp/.lmapicmd
+fi
