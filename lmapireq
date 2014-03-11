@@ -39,27 +39,27 @@ then
   usage_error
   exit
 else
-  if [ $1 = '-h' ] || [ $1 = '--host' ]
+  if [ "$1" = '-h' ] || [ "$1" = '--host' ]
   then
     host=$2
   else
-    if [ $3 = '-h' ] || [ $3 = '--host' ]
+    if [ "$3" = '-h' ] || [ "$3" = '--host' ]
     then
       host=$4
     else
-      if [ $5 = '-h' ] || [ $5 = '--host' ]
+      if [ "$5" = '-h' ] || [ "$5" = '--host' ]
       then
         host=$6
       else
-        if [ $7 = '-h' ] || [ $7 = '--host' ]
+        if [ "$7" = '-h' ] || [ "$7" = '--host' ]
         then
           host=$8
         else
-          if [ $9 = '-h' ] || [ $9 = '--host' ]
+          if [ "$9" = '-h' ] || [ "$9" = '--host' ]
           then
             host=${10}
           else
-            if [ ${11} = '-h' ] || [ ${11} = '--host' ]
+            if [ "${11}" = '-h' ] || [ "${11}" = '--host' ]
             then
               host=${12}
             fi
@@ -69,33 +69,33 @@ else
     fi
   fi
   if [ -z "$host" ]
-    then
-    echo "Host not specified\n\n"
+  then
+    echo -e "\nERROR - Host not specified\n"
     usage_error
     exit
   fi
 
-  if [ $1 = '-a' ] || [ $1 = '--apikey' ]
+  if [ "$1" = '-a' ] || [ "$1" = '--apikey' ]
   then
     apikey=$2
   else
-    if [ $3 = '-a' ] || [ $3 = '--apikey' ]
+    if [ "$3" = '-a' ] || [ "$3" = '--apikey' ]
     then
       apikey=$4
     else
-      if [ $5 = '-a' ] || [ $5 = '--apikey' ]
+      if [ "$5" = '-a' ] || [ "$5" = '--apikey' ]
       then
         apikey=$6
       else
-        if [ $7 = '-a' ] || [ $7 = '--apikey' ]
+        if [ "$7" = '-a' ] || [ "$7" = '--apikey' ]
         then
           apikey=$8
         else
-          if [ $9 = '-a' ] || [ $9 = '--apikey' ]
+          if [ "$9" = '-a' ] || [ "$9" = '--apikey' ]
           then
             apikey=${10}
           else
-            if [ ${11} = '-a' ] || [ ${11} = '--apikey' ]
+            if [ "${11}" = '-a' ] || [ "${11}" = '--apikey' ]
             then
               apikey=${12}
             fi
@@ -106,32 +106,32 @@ else
   fi
   if [ -z "$apikey" ]
   then
-    echo "API Key not specified\n\n"
+    echo -e "\nERROR - API Key not specified\n"
     usage_error
     exit
   fi
 
-  if [ $1 = '-u' ] || [ $1 = '--user' ]
+  if [ "$1" = '-u' ] || [ "$1" = '--user' ]
   then
     user=$2
   else
-    if [ $3 = '-u' ] || [ $3 = '--user' ]
+    if [ "$3" = '-u' ] || [ "$3" = '--user' ]
     then
       user=$4
     else
-      if [ $5 = '-u' ] || [ $5 = '--user' ]
+      if [ "$5" = '-u' ] || [ "$5" = '--user' ]
       then
         user=$6
       else
-        if [ $7 = '-u' ] || [ $7 = '--user' ]
+        if [ "$7" = '-u' ] || [ "$7" = '--user' ]
         then
           user=$8
         else
-          if [ $9 = '-u' ] || [ $9 = '--user' ]
+          if [ "$9" = '-u' ] || [ "$9" = '--user' ]
           then
             user=${10}
           else
-            if [ ${11} = '-u' ] || [ ${11} = '--user' ]
+            if [ "${11}" = '-u' ] || [ "${11}" = '--user' ]
             then
               user=${12}
             fi
@@ -142,32 +142,32 @@ else
   fi
   if [ -z "$user" ]
   then
-    echo "User not specified\n\n"
+    echo -e "\nERROR - User not specified\n"
     usage_error
     exit
   fi
 
-  if [ $1 = '-i' ] || [ $1 = '--uri' ]
+  if [ "$1" = '-i' ] || [ "$1" = '--uri' ]
   then
     uri=$2
   else
-    if [ $3 = '-i' ] || [ $3 = '--uri' ]
+    if [ "$3" = '-i' ] || [ "$3" = '--uri' ]
     then
       uri=$4
     else
-      if [ $5 = '-i' ] || [ $5 = '--uri' ]
+      if [ "$5" = '-i' ] || [ "$5" = '--uri' ]
       then
         uri=$6
       else
-        if [ $7 = '-i' ] || [ $7 = '--uri' ]
+        if [ "$7" = '-i' ] || [ "$7" = '--uri' ]
         then
           uri=$8
         else
-          if [ $9 = '-i' ] || [ $9 = '--uri' ]
+          if [ "$9" = '-i' ] || [ "$9" = '--uri' ]
           then
             uri=${10}
           else
-            if [ ${11} = '-i' ] || [ ${11} = '--uri' ]
+            if [ "${11}" = '-i' ] || [ "${11}" = '--uri' ]
             then
               uri=${12}
             fi
@@ -178,54 +178,54 @@ else
   fi
   if [ -z "$uri" ]
   then
-    echo "URI not specified\n\n"
+    echo -e "\nERROR - URI not specified\n"
     usage_error
     exit
   fi
 
-  if [ $1 = '-m' ] || [ $1 = '--method' ]
+  if [ "$1" = '-m' ] || [ "$1" = '--method' ]
   then
-    if [ $3 = '-p' ] || [ $3 = '--param' ]
+    if [ "$3" = '-p' ] || [ "$3" = '--param' ]
     then
       other="-X $2 -d '$4'"
     else
-      echo "JSON Parameter is missing\n\n"
+      echo -e "\nERROR - JSON Parameter is missing or should be specified after the method is passed\n"
     fi
   else
-    if [ $3 = '-m' ] || [ $3 = '--method' ]
+    if [ "$3" = '-m' ] || [ "$3" = '--method' ]
     then
-      if [ $5 = '-p' ] || [ $5 = '--param' ]
+      if [ "$5" = '-p' ] || [ "$5" = '--param' ]
       then
         other="-X $4 -d '$6'"
       else
-        echo "JSON Parameter is missing\n\n"
+        echo -e "\nERROR - JSON Parameter is missing or should be specified after the method is passed\n"
       fi
     else
-      if [ $5 = '-m' ] || [ $5 = '--method' ]
+      if [ "$5" = '-m' ] || [ "$5" = '--method' ]
       then
-        if [ $7 = '-p' ] || [ $7 = '--param' ]
+        if [ "$7" = '-p' ] || [ "$7" = '--param' ]
         then
           other="-X $6 -d '$8'"
         else
-          echo "JSON Parameter is missing\n\n"
+          echo -e "\nERROR - JSON Parameter is missing or should be specified after the method is passed\n"
         fi
       else
-        if [ $7 = '-m' ] || [ $7 = '--method' ]
+        if [ "$7" = '-m' ] || [ "$7" = '--method' ]
         then
-          if [ $9 = '-p' ] || [ $9 = '--param' ]
+          if [ "$9" = '-p' ] || [ "$9" = '--param' ]
           then
             other="-X $8 -d '${10}'"
            else
-             echo "JSON Parameter is missing\n\n"
+             echo -e "\nERROR - JSON Parameter is missing or should be specified after the method is passed\n"
            fi
          else
-           if [ $9 = '-m' ] || [ $9 = '--method' ]
+           if [ "$9" = '-m' ] || [ "$9" = '--method' ]
            then
-             if [ ${11} = '-p' ] || [ ${11} = '--param' ]
+             if [ "${11}" = '-p' ] || [ "${11}" = '--param' ]
              then
                other="-X ${10} -d '${12}'"
              else
-               echo "JSON Parameter is missing\n\n"
+               echo -e "\nERROR - JSON Parameter is missing or should be specified after the method is passed\n"
              fi
            fi
          fi
@@ -233,7 +233,6 @@ else
     fi
   fi
 
-  echo "other: $other"
   usrtok=`curl -k $host/api/auth/token/grue|grep token|sed 's/.*: "\(.*\)"/\1/'`
   authtok=`/usr/bin/getAuthTokenLM $usrtok $apikey`
   IFSO=$IFS
