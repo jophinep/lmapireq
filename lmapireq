@@ -21,7 +21,7 @@ Parameters:
 -u | --user     username
 -i | --uri      api access uri
 -m | --method   REST API methods like POST/PUT/DELETE (not needed if request is GET, GET is default)
--p | --param    JSON parameters required if method is specified (-m or --method option)
+-p | --param    JSON parameters required if method is specified (should be passed next to method parameter)
 
 Usage:
 
@@ -189,7 +189,7 @@ else
     then
       other="-X $2 -d '$4'"
     else
-      echo -e "\nERROR - JSON Parameter is missing or should be specified after the method is passed\n"
+      echo -e "\nERROR - JSON Parameter is missing or should be specified next to method option\n"
     fi
   else
     if [ "$3" = '-m' ] || [ "$3" = '--method' ]
@@ -198,7 +198,7 @@ else
       then
         other="-X $4 -d '$6'"
       else
-        echo -e "\nERROR - JSON Parameter is missing or should be specified after the method is passed\n"
+        echo -e "\nERROR - JSON Parameter is missing or should be specified next to method option\n"
       fi
     else
       if [ "$5" = '-m' ] || [ "$5" = '--method' ]
@@ -207,7 +207,7 @@ else
         then
           other="-X $6 -d '$8'"
         else
-          echo -e "\nERROR - JSON Parameter is missing or should be specified after the method is passed\n"
+          echo -e "\nERROR - JSON Parameter is missing or should be specified next to method option\n"
         fi
       else
         if [ "$7" = '-m' ] || [ "$7" = '--method' ]
@@ -216,7 +216,7 @@ else
           then
             other="-X $8 -d '${10}'"
            else
-             echo -e "\nERROR - JSON Parameter is missing or should be specified after the method is passed\n"
+             echo -e "\nERROR - JSON Parameter is missing or should be specified next to method option\n"
            fi
          else
            if [ "$9" = '-m' ] || [ "$9" = '--method' ]
@@ -225,7 +225,7 @@ else
              then
                other="-X ${10} -d '${12}'"
              else
-               echo -e "\nERROR - JSON Parameter is missing or should be specified after the method is passed\n"
+               echo -e "\nERROR - JSON Parameter is missing or should be specified next to method option\n"
              fi
            fi
          fi
