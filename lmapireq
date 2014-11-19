@@ -237,7 +237,7 @@ else
   authtok=`/usr/bin/getAuthTokenLM $usrtok $apikey`
   IFSO=$IFS
   IFS=' '
-  echo "curl -k -v -s -H \"X-Auth-Token: $authtok\" -H \"X-Auth-User: $user\" $other $host/api/$uri">/tmp/.lmapicmd
+  echo "curl -k -v -s -H \"X-Auth-Token: $authtok\" -H \"X-Auth-User: $user\" $other $host/api/$uri && echo">/tmp/.lmapicmd
   IFS=$IFSO
   sh /tmp/.lmapicmd
   rm /tmp/.lmapicmd
